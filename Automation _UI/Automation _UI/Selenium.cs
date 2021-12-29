@@ -16,7 +16,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_Search_Veyran()
         {
-            //chrome.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             chrome = StartDriverWithUrl("https://edhrec.com");
             IWebElement search = chrome.FindElement(By.CssSelector("input[placeholder='Search']"));
             search.SendKeys("Veyran, Voice of Duality");
@@ -84,40 +83,38 @@ namespace Automation__UI
         public void Test_EdhRec_Dragons_Type()
         {
             chrome = StartDriverWithUrl("https://edhrec.com");
-            IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
-            cards.Click();
-            IWebElement by_color = chrome.FindElement(By.Id("navbar-cards-by-color"));
-            by_color.Click();
-            IWebElement multicolor_cards = chrome.FindElement(By.XPath("//a[7]/span/span[2]"));
-            multicolor_cards.Click();
-            IWebElement assassinsTrophy = chrome.FindElement(By.CssSelector("a[href='/cards/assassins-trophy']"));
-            assassinsTrophy.Click();
+            IWebElement themes = chrome.FindElement(By.Id("navbar-themes"));
+            themes.Click();
+            IWebElement dragons = chrome.FindElement(By.CssSelector("a[href='/tribes/dragons']"));
+            dragons.Click();
+            IWebElement bigmana = chrome.FindElement(By.CssSelector("a[href='/themes/big-mana/dragons']"));
+            bigmana.Click();
             string actual = chrome.Url;
-            Assert.Equal("https://edhrec.com/cards/assassins-trophy", actual);
+            Assert.Equal("https://edhrec.com/themes/big-mana/dragons", actual);
         }
         [Fact]
-        public void Test_EdhRec_WhiteCards()
+        public void Test_EdhRec_Search_Combo_YoreTiller()
+        {
+            chrome = StartDriverWithUrl("https://edhrec.com");
+            IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
+            cards.Click();
+            IWebElement combos = chrome.FindElement(By.CssSelector("a[href='/combos']"));
+            combos.Click();
+            IWebElement yoreTiller = chrome.FindElement(By.XPath("//span[contains(.,'Yore-Tiller')]"));
+            yoreTiller.Click();
+            IWebElement saltarBreyaCombo = chrome.FindElement(By.CssSelector("a[href='/combos/wubr/634']"));
+            saltarBreyaCombo.Click();
+            string actual = chrome.Url;
+            Assert.Equal("https://edhrec.com/combos/wubr/634", actual);
+        }
+        [Fact]
+        public void Test_EdhRec_Change_HUD_Mode()
         {
             chrome = StartDriverWithUrl("https://edhrec.com");
             IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
             cards.Click();
             IWebElement by_color = chrome.FindElement(By.Id("navbar-cards-by-color"));
             by_color.Click();
-            IWebElement green_cards = chrome.FindElement(By.CssSelector("a[href='/top/w']"));
-            green_cards.Click();
-            string actual = chrome.Url;
-            Assert.Equal("https://edhrec.com/top/w", actual);
-        }
-        [Fact]
-        public void Test_EdhRec_BlueCards()
-        {
-            chrome = StartDriverWithUrl("https://edhrec.com");
-            IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
-            cards.Click();
-            IWebElement by_color = chrome.FindElement(By.Id("navbar-cards-by-color"));
-            by_color.Click();
-            IWebElement green_cards = chrome.FindElement(By.CssSelector("a[href='/top/u']"));
-            green_cards.Click();
             string actual = chrome.Url;
             Assert.Equal("https://edhrec.com/top/u", actual);
         }

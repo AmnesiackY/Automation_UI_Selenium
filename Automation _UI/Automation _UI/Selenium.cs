@@ -147,7 +147,7 @@ namespace Automation__UI
             Assert.Equal("https://edhrec.com/top/b", actual);
         }
         [Fact]
-        public void Test_EdhRec_Sets()
+        public void Test_EdhRec_Sets_MHC()
         {
             chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();

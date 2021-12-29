@@ -33,7 +33,7 @@ namespace Automation__UI
             commanders.Click();
             IWebElement top_commanders = chrome.FindElement(By.CssSelector(".dropdown-item:nth-child(1) > span"));
             top_commanders.Click();
-            IWebElement Urico = chrome.FindElement(By.CssSelector(".CardView_card__2vJOP:nth-child(4) .Card_image__3uHo Y"));
+            IWebElement Urico = chrome.FindElement(By.XPath("//div[4]/div/div/a/div/img"));
             Urico.Click();
             IWebElement AvarageDecks = chrome.FindElement(By.XPath("//a[contains(text(),'Average Deck')]"));
             AvarageDecks.Click();
@@ -74,6 +74,7 @@ namespace Automation__UI
             by_color.Click();
             IWebElement multicolor_cards = chrome.FindElement(By.XPath("//a[7]/span/span[2]"));
             multicolor_cards.Click();
+            Thread.Sleep(1000);
             IWebElement assassinsTrophy = chrome.FindElement(By.CssSelector("a[href='/cards/assassins-trophy']"));
             assassinsTrophy.Click();
             string actual = chrome.Url;
@@ -108,15 +109,26 @@ namespace Automation__UI
             Assert.Equal("https://edhrec.com/combos/wubr/634", actual);
         }
         [Fact]
-        public void Test_EdhRec_Change_HUD_Mode()
+        public void Test_EdhRec_Change_toWhite_Mode()
         {
             chrome = StartDriverWithUrl("https://edhrec.com");
-            IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
-            cards.Click();
-            IWebElement by_color = chrome.FindElement(By.Id("navbar-cards-by-color"));
-            by_color.Click();
-            string actual = chrome.Url;
-            Assert.Equal("https://edhrec.com/top/u", actual);
+            IWebElement cog = chrome.FindElement(By.Id("navbar-cards"));
+            cog.Click();
+            IWebElement slider = chrome.FindElement(By.XPath("//div[2]/div/div/div/div/label"));
+            slider.Click();
+            string actual = chrome.FindElement(By.ClassName("modal-open light-mode")).GetCssValue("class");
+            Assert.Equal("modal-open light-mode", actual);
+        }
+        [Fact]
+        public void Test_EdhRec_Change_toDark_Mode()
+        {
+            chrome = StartDriverWithUrl("https://edhrec.com");
+            IWebElement cog = chrome.FindElement(By.Id("navbar-cards"));
+            cog.Click();
+            IWebElement slider = chrome.FindElement(By.XPath("//div[2]/div/div/div/div/label"));
+            slider.Click();
+            string actual = chrome.FindElement(By.ClassName("modal-open dark-mode")).GetCssValue("class");
+            Assert.Equal("modal-open dark-mode", actual);
         }
         [Fact]
         public void Test_EdhRec_BlackCards()

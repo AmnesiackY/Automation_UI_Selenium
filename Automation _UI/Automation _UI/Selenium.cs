@@ -9,6 +9,10 @@ namespace Automation__UI
     public class Selenium : IDisposable
     {
         IWebDriver chrome;
+        public Selenium()
+        {
+            chrome = new ChromeDriver();
+        }
         public void Dispose()
         {
             chrome.Quit();
@@ -16,7 +20,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_Search()
         {
-            chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("https://edhrec.com");
             IWebElement search = chrome.FindElement(By.CssSelector("input[placeholder='Search']"));
@@ -30,7 +33,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_TopComanders()
         {
-            chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("https://edhrec.com");
             IWebElement commanders = chrome.FindElement(By.Id("navbar-commanders"));
@@ -44,7 +46,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_GreenCards()
         {
-            chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("https://edhrec.com");
             IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
@@ -59,7 +60,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_ColorlessCards()
         {
-            chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("https://edhrec.com");
             IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
@@ -74,7 +74,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_MultiColorCards()
         {
-            chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("https://edhrec.com");
             IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
@@ -89,7 +88,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_RedCards()
         {
-            chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("https://edhrec.com");
             IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
@@ -104,7 +102,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_WhiteCards()
         {
-            chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("https://edhrec.com");
             IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
@@ -119,7 +116,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_BlueCards()
         {
-            chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("https://edhrec.com");
             IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
@@ -134,7 +130,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_BlackCards()
         {
-            chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("https://edhrec.com");
             IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
@@ -149,7 +144,6 @@ namespace Automation__UI
         [Fact]
         public void Test_EdhRec_Sets_MHC()
         {
-            chrome = new ChromeDriver();
             chrome.Manage().Window.Maximize();
             chrome.Navigate().GoToUrl("https://edhrec.com");
             IWebElement commanders = chrome.FindElement(By.Id("navbar-sets"));

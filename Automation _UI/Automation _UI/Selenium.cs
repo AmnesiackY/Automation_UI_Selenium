@@ -9,10 +9,10 @@ namespace Automation__UI
     public class Selenium : BaseTest
     {
         IWebDriver chrome;
-        public void Dispose()
-        {
-            chrome.Quit();
-        }
+        //public void Dispose()
+        //{
+        //    chrome.Quit();
+        //}
         [Fact]
         public void Test_EdhRec_Search_Veyran()
         {
@@ -112,47 +112,48 @@ namespace Automation__UI
         public void Test_EdhRec_Change_toWhite_Mode()
         {
             chrome = StartDriverWithUrl("https://edhrec.com");
-            IWebElement cog = chrome.FindElement(By.Id("navbar-cards"));
+            IWebElement cog = chrome.FindElement(By.XPath("//div[4]/button"));
             cog.Click();
             IWebElement slider = chrome.FindElement(By.XPath("//div[2]/div/div/div/div/label"));
             slider.Click();
-            string actual = chrome.FindElement(By.ClassName("modal-open light-mode")).GetCssValue("class");
-            Assert.Equal("modal-open light-mode", actual);
+            string actual = chrome.FindElement(By.CssSelector("svg[data-icon='sun']")).GetDomAttribute("data-icon");
+            Assert.Equal("sun", actual);
         }
         [Fact]
-        public void Test_EdhRec_Change_toDark_Mode()
-        {
-            chrome = StartDriverWithUrl("https://edhrec.com");
-            IWebElement cog = chrome.FindElement(By.Id("navbar-cards"));
-            cog.Click();
-            IWebElement slider = chrome.FindElement(By.XPath("//div[2]/div/div/div/div/label"));
-            slider.Click();
-            string actual = chrome.FindElement(By.ClassName("modal-open dark-mode")).GetCssValue("class");
-            Assert.Equal("modal-open dark-mode", actual);
-        }
-        [Fact]
-        public void Test_EdhRec_BlackCards()
+        public void Test_EdhRec_FromMask_ToThrun()
         {
             chrome = StartDriverWithUrl("https://edhrec.com");
             IWebElement cards = chrome.FindElement(By.Id("navbar-cards"));
             cards.Click();
-            IWebElement by_color = chrome.FindElement(By.Id("navbar-cards-by-color"));
-            by_color.Click();
-            IWebElement green_cards = chrome.FindElement(By.CssSelector("a[href='/top/b']"));
-            green_cards.Click();
+            IWebElement type = chrome.FindElement(By.Id("navbar-cards-by-type"));
+            type.Click();
+            IWebElement auras = chrome.FindElement(By.XPath("//span[contains(.,'Auras')]"));
+            auras.Click();
+            IWebElement ancestralMask = chrome.FindElement(By.CssSelector("a[href='/cards/ancestral-mask']"));
+            ancestralMask.Click();
+            IWebElement thrun = chrome.FindElement(By.CssSelector("a[href='/commanders/thrun-the-last-troll']"));
+            thrun.Click();
             string actual = chrome.Url;
-            Assert.Equal("https://edhrec.com/top/b", actual);
+            Assert.Equal("https://edhrec.com/commanders/thrun-the-last-troll", actual);
         }
         [Fact]
-        public void Test_EdhRec_Sets_MHC()
+        public void Test_EdhRec_FromFiveColors_ToTheUrDragon()
         {
             chrome = StartDriverWithUrl("https://edhrec.com");
-            IWebElement commanders = chrome.FindElement(By.Id("navbar-sets"));
+            IWebElement commanders = chrome.FindElement(By.Id("navbar-commanders"));
             commanders.Click();
-            IWebElement midnight_Hunt_Commanders = chrome.FindElement(By.XPath("//a[4]/span"));
-            midnight_Hunt_Commanders.Click();
+            IWebElement fourPlusColor = chrome.FindElement(By.Id("navbar-commanders-4-5-color"));
+            fourPlusColor.Click();
+            IWebElement fiveColor = chrome.FindElement(By.XPath("//span[6]"));
+            fiveColor.Click();
+            IWebElement bigMana = chrome.FindElement(By.XPath("//div[4]/a/div/span"));
+            bigMana.Click();
+            IWebElement dragons = chrome.FindElement(By.XPath("//span[contains(.,'Dragons')]"));
+            dragons.Click();
+            IWebElement theUr_Dragon = chrome.FindElement(By.XPath("//img[@alt='The Ur-Dragon']"));
+            theUr_Dragon.Click();
             string actual = chrome.Url;
-            Assert.Equal("https://edhrec.com/sets/mic", actual);
+            Assert.Equal("https://edhrec.com/commanders/the-ur-dragon/dragon", actual);
         }
     }
 }

@@ -155,6 +155,7 @@ namespace Automation__UI
             string actual = chrome.Url;
             Assert.Equal("https://edhrec.com/commanders/the-ur-dragon/dragon", actual);
         }
+        [Fact]
         public void Test_EdhRec_Create_Rec()
         {
             chrome = StartDriverWithUrl("https://edhrec.com");
@@ -177,10 +178,13 @@ namespace Automation__UI
                 " \n1 Metallurgic Summonings \n1 Sorcerer Class \n1 Swarm Intelligence \n1 Thousand-Year Storm \n1 Ral, Storm Conduit \n1 Command Tower \n1 Exotic Orchard \n1 Frostboil Snarl \n1 Izzet Boilerworks " +
                 "\n1 Mystic Sanctuary \n1 Reliquary Tower \n1 Shivan Reef \n1 Steam Vents \n1 Stormcarved Coast \n1 Sulfur Falls \n1 Temple of Epiphany \n1 Training Center \n11 Island \n9 Mountain");
             IWebElement submit = chrome.FindElement(By.XPath("//button[@type='submit']"));
-            Thread.Sleep(3000);
+            Thread.Sleep(1000);
             submit.Click();
-            Thread.Sleep(3000);
-            Assert.Equal("Recs | EDHREC", chrome.Title);
+            Thread.Sleep(1000);
+            IWebElement ariaOfFlame = chrome.FindElement(By.CssSelector("a[href='/cards/myriad-landscape']"));
+            ariaOfFlame.Click();
+            string actual = chrome.Url;
+            Assert.Equal("https://edhrec.com/cards/myriad-landscape", actual);
         }
     }
 }

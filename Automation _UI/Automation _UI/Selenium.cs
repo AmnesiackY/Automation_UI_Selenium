@@ -9,10 +9,6 @@ namespace Automation__UI
     public class Selenium : BaseTest
     {
         IWebDriver chrome;
-        public void Dispose()
-        {
-            chrome.Quit();
-        }
         [Fact]
         public void Test_EdhRec_Search_Veyran()
         {
@@ -116,8 +112,8 @@ namespace Automation__UI
             cog.Click();
             IWebElement slider = chrome.FindElement(By.XPath("//div[2]/div/div/div/div/label"));
             slider.Click();
-            string actual = chrome.FindElement(By.CssSelector("svg[data-icon='sun']")).GetDomAttribute("data-icon");
-            Assert.Equal("sun", actual);
+            string actual = chrome.FindElement(By.CssSelector("svg[data-icon='moon']")).GetDomAttribute("data-icon");
+            Assert.Equal("moon", actual);
         }
         [Fact]
         public void Test_EdhRec_FromMask_ToThrun()
@@ -154,6 +150,33 @@ namespace Automation__UI
             theUr_Dragon.Click();
             string actual = chrome.Url;
             Assert.Equal("https://edhrec.com/commanders/the-ur-dragon/dragon", actual);
+        }
+        public void Test_EdhRec_Create_Rec()
+        {
+            chrome = StartDriverWithUrl("https://edhrec.com");
+            IWebElement rec = chrome.FindElement(By.XPath("//a[contains(@href, '/recs')]"));
+            rec.Click();
+            IWebElement commander = chrome.FindElement(By.XPath("//div[2]/div/input"));
+            commander.Click();
+            commander.SendKeys("Veyran, Voice of Duality");
+            commander.SendKeys(Keys.ArrowDown);
+            commander.SendKeys(Keys.Enter);
+            IWebElement decklist = chrome.FindElement(By.XPath("/html/body/div/div/div[1]/div[2]/div[2]/div[1]/div/div/div/form/div[2]/textarea"));
+            decklist.Click();
+            decklist.SendKeys("1 Archmage Emeritus \n1 Birgi, God of Storytelling \n1 Dualcaster Mage \n1 Electrostatic Field \n1 Firebrand Archer \n1 Goblin Electromancer" +
+                " \n1 Guttersnipe \n1 Harmonic Prodigy \n1 Jori En, Ruin Diver \n1 Kessig Flamebreather \n1 Krark, the Thumbless \n1 Murmuring Mystic \n1 Niv-Mizzet, Parun \n1 " +
+                "Smoldering Egg \n1 Storm-Kiln Artist \n1 Talrand, Sky Summoner \n1 Young Pyromancer \n1 Brainstorm \n1 Chaos Warp \n1 Consider \n1 Counterspell \n1 Cyclonic Rift " +
+                "\n1 Dig Through Time \n1 Expansion // Explosion \n1 Expedite \n1 Frantic Search \n1 Galvanic Iteration \n1 Narset's Reversal \n1 Negate \n1 Opt \n1 Pongify \n1 Prismari Command" +
+                " \n1 Rapid Hybridization \n1 Reinterpret \n1 Reverberate \n1 Seething Song \n1 Valakut Awakening \n1 Blasphemous Act \n1 Crash Through \n1 Expressive Iteration \n1 Faithless Looting " +
+                "\n1 Gitaxian Probe \n1 Grapeshot \n1 Jeska's Will \n1 Mana Geyser \n1 Mind's Desire \n1 Mizzix's Mastery \n1 Past in Flames \n1 Ponder \n1 Preordain \n1 Serum Visions \n1 Treasure Cruise" +
+                " \n1 Windfall \n1 Aetherflux Reservoir \n1 Arcane Signet \n1 Izzet Signet \n1 Mind Stone \n1 Primal Amulet \n1 Pyromancer's Goggles \n1 Sol Ring \n1 Talisman of Creativity \n1 Thought Vessel" +
+                " \n1 Metallurgic Summonings \n1 Sorcerer Class \n1 Swarm Intelligence \n1 Thousand-Year Storm \n1 Ral, Storm Conduit \n1 Command Tower \n1 Exotic Orchard \n1 Frostboil Snarl \n1 Izzet Boilerworks " +
+                "\n1 Mystic Sanctuary \n1 Reliquary Tower \n1 Shivan Reef \n1 Steam Vents \n1 Stormcarved Coast \n1 Sulfur Falls \n1 Temple of Epiphany \n1 Training Center \n11 Island \n9 Mountain");
+            IWebElement submit = chrome.FindElement(By.XPath("//button[@type='submit']"));
+            Thread.Sleep(3000);
+            submit.Click();
+            Thread.Sleep(3000);
+            Assert.Equal("Recs | EDHREC", chrome.Title);
         }
     }
 }

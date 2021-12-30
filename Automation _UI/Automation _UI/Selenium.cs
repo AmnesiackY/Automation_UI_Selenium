@@ -110,10 +110,14 @@ namespace Automation__UI
             chrome = StartDriverWithUrl("https://edhrec.com");
             IWebElement cog = chrome.FindElement(By.XPath("//div[4]/button"));
             cog.Click();
-            IWebElement slider = chrome.FindElement(By.XPath("//div[2]/div/div/div/div/label"));
-            slider.Click();
-            string actual = chrome.FindElement(By.CssSelector("svg[data-icon='moon']")).GetDomAttribute("data-icon");
-            Assert.Equal("moon", actual);
+            IWebElement elem_check = chrome.FindElement(By.XPath("/html/body/div[3]/div/div/div[2]/div/div[1]/div/div/label"));
+            elem_check.Click();
+            string moon = chrome.FindElement(By.CssSelector("svg[data-icon='moon']")).GetDomAttribute("data-icon");
+            Assert.Equal("moon", moon);
+            IWebElement slider_return = chrome.FindElement(By.XPath("/html/body/div[3]/div/div/div[2]/div/div[1]/div/div/label"));
+            slider_return.Click();
+            IWebElement exit = chrome.FindElement(By.XPath("/html/body/div[3]/div/div/div[1]/button/span[1]"));
+            exit.Click();
         }
         [Fact]
         public void Test_EdhRec_FromMask_ToThrun()

@@ -9,10 +9,10 @@ namespace Automation__UI
     public class Selenium : BaseTest
     {
         IWebDriver chrome;
-        //public void Dispose()
-        //{
-        //    chrome.Quit();
-        //}
+        public void Dispose()
+        {
+            chrome.Quit();
+        }
         [Fact]
         public void Test_EdhRec_Search_Veyran()
         {

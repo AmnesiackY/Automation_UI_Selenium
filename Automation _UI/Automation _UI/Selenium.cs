@@ -112,8 +112,8 @@ namespace Automation__UI
             cog.Click();
             IWebElement elem_check = chrome.FindElement(By.XPath("/html/body/div[3]/div/div/div[2]/div/div[1]/div/div/label"));
             elem_check.Click();
-            string moon = chrome.FindElement(By.CssSelector("svg[data-icon='moon']")).GetDomAttribute("data-icon");
-            Assert.Equal("moon", moon);
+            string sun = chrome.FindElement(By.CssSelector("svg[data-icon='sun']")).GetDomAttribute("data-icon");
+            Assert.Equal("sun", sun);
             IWebElement slider_return = chrome.FindElement(By.XPath("/html/body/div[3]/div/div/div[2]/div/div[1]/div/div/label"));
             slider_return.Click();
             IWebElement exit = chrome.FindElement(By.XPath("/html/body/div[3]/div/div/div[1]/button/span[1]"));

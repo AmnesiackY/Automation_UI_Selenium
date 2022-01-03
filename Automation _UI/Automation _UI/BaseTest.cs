@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 
 namespace Automation__UI
 {
-    public class BaseTest /*: IDisposable*/
+    public class BaseTest : IDisposable
     {
         private IWebDriver _driver;
         public void Dispose()
